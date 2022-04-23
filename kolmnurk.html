@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+</body>
+</html>
+
+<style>
+* { margin:0; padding:0; }
+html, body { height: 100%; width: 100%;}
+canvas{display: block;}
+</style>
+
+<script>
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+    var height = window.innerHeight
+    var width = window.innerWidth
+    
+    canvas.width = width;
+    canvas.height = height;
+
+    const anchorPoints = new Array();
+//Create Var
+var circ = new Circle(width/1.5, height/1.3, 5);
+
+//Define the circle
+function Circle(x, y, r) {
+    "use strict";
+    this.x = (x === null) ? 0 : x;
+    this.y = (y === null) ? 0 : y;
+    this.r = (r === null) ? 0 : r;
+    
+    this.fill = function(ctx) {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
+        ctx.fill();
+    }
+}
+
+//Draw the circle as object
+circ.fill(ctx);
+</script>
