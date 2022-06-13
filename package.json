@@ -1,0 +1,24 @@
+{
+  "name": "triangle-canvaas",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "parcel serve ./index.html",
+    "build": "parcel build ./index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tuulingo/Triangle-canvaas.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tuulingo/Triangle-canvaas/issues"
+  },
+  "homepage": "https://github.com/tuulingo/Triangle-canvaas#readme",
+  "keywords": [],
+  "description": "",
+  "dependencies": {
+    "parcel": "^2.6.0"
+  }
+}
