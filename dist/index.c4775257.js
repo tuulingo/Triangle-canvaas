@@ -5,6 +5,8 @@ window.addEventListener("load", ()=>{
     let ctx1 = el.getContext("2d");
     var height = window.innerHeight;
     var width = window.innerWidth;
+    var dotCount = 0;
+    var firstDotCount = 0;
     canvas.width = width;
     canvas.height = height;
     var circright = new Circle(width * 0.66, height * 0.75, 2);
@@ -12,16 +14,19 @@ window.addEventListener("load", ()=>{
     var circleft = new Circle(width * 0.33, height * 0.75, 2);
     const anchorPoints = new Array();
     anchorPoints.push(circright, circmiddle, circleft);
-    let divisions = 1;
-    // Try to create 'divisions' amount of dots between pos1 and pos2
-    // this.targetDot = (targetDot === null) ? 0 : circmiddle;
-    // this.lastDot = (lastDot === null) ? 0 : circleft;
-    // var targetDot = anchorPoints[Math.floor(Math.random()*items.length)];
-    // var lastDot = anchorPoints[anchorPoints.length - 1];
-    // let increment_x = (targetDot.x-lastDot.x)/(divisions+1)
-    // let increment_y = (targetDot.y-lastDot.y)/(divisions+1)
-    // console.log(increment_x)
-    // var newDot = new Circle(increment_x, increment_y)
+    this.targetDot = targetDot === null ? 0 : circmiddle;
+    this.lastDot = lastDot === null ? 0 : circleft;
+    var targetDot = anchorPoints[Math.floor(Math.random() * anchorPoints.length)];
+    var lastDot = anchorPoints[anchorPoints.length];
+    // var increment_x = (targetDot.x-lastDot.x)/2;
+    // var increment_y = (targetDot.y-lastDot.y)/2;
+    var testx = (circleft.x + circmiddle.x) / 2;
+    var testy = (circleft.y + circmiddle.y) / 2;
+    console.log(circleft.x + "  " + circleft.y + " <----left middle------>" + circmiddle.x + "  " + circmiddle.y);
+    console.log(testx + "<---- X Y ----->" + testy);
+    var newDot = new Circle(testx, testy, 2);
+    var firstDot = new Circle();
+    // console.log(testx + "<--x y-->  " + testy);
     //targetDot is the dot that is going to be targeted next, lastDot i
     //Define the circle
     function Circle(x, y, r, targetDot, lastDot) {
@@ -43,6 +48,10 @@ window.addEventListener("load", ()=>{
     circright.fill(ctx1);
     circmiddle.fill(ctx1);
     circleft.fill(ctx1);
+    while(dotCount < 2)if (firstDotCount != 1) {
+        newDot.fill(ctx1);
+        firstDotCount++;
+    }
 });
 
 //# sourceMappingURL=index.c4775257.js.map
