@@ -10,9 +10,11 @@ window.addEventListener("load", () => {
   canvas.width = width;
   canvas.height = height;
 
-  var circright = new Circle(width * 0.66, height * 0.75, 1.5);
-  var circmiddle = new Circle(width * 0.5, height * 0.25, 1.5);
-  var circleft = new Circle(width * 0.33, height * 0.75, 1.5);
+  var dotsCreated = 0;
+
+  var circright = new Circle(width * 0.66, height * 0.75, 1);
+  var circmiddle = new Circle(width * 0.5, height * 0.25, 1);
+  var circleft = new Circle(width * 0.33, height * 0.75, 1);
   const anchorPoints = new Array();
   anchorPoints.push(circleft, circmiddle, circright);
 
@@ -34,25 +36,29 @@ window.addEventListener("load", () => {
   circleft.fill(ctx);
 
   $(document).ready(function () {
-    $("#container input[type=button]").click(ChooseDot);
+    $("#htmlContainer input[type=button]").click(ChooseDot);
   });
 
   async function ChooseDot() {
-    var newDot;
-
     var newDotx = (circleft.x + circmiddle.x) / 2;
     var newDoty = (circleft.y + circmiddle.y) / 2;
-    var newDot = new Circle(newDotx, newDoty, 0.5);
+    var newDot = new Circle(newDotx, newDoty, 1);
     newDot.fill(ctx);
+    dotsCreated++;
+    $("#counter").text(dotsCreated.toString());
+
+    await sleep(1200);
     for (let i = 0; i < 50000; i++) {
       var targetDot =
         anchorPoints[Math.floor(Math.random() * anchorPoints.length)];
       var lastDotx = (newDot.x + targetDot.x) / 2;
       var lastDoty = (newDot.y + targetDot.y) / 2;
-      var lastDot = new Circle(lastDotx, lastDoty, 0.5);
+      var lastDot = new Circle(lastDotx, lastDoty, 0.75);
       lastDot.fill(ctx);
+      $("#counter").text(dotsCreated.toString());
       newDot = lastDot;
-      await sleep(10);
+      dotsCreated++;
+      await sleep(1);
     }
   }
 
