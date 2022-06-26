@@ -7,10 +7,6 @@ window.addEventListener("load", () => {
   var height = window.innerHeight;
   var width = window.innerWidth;
 
-  var randomDotsCount = 0;
-  var firstDotCount = 0;
-  var newDotCount = 0;
-
   canvas.width = width;
   canvas.height = height;
 
@@ -20,8 +16,6 @@ window.addEventListener("load", () => {
   const anchorPoints = new Array();
   anchorPoints.push(circleft, circmiddle, circright);
 
-  //targetDot is the dot that is going to be targeted next, lastDot i
-  //Define the circle
   function Circle(x, y, r) {
     "use strict";
     this.x = x === null ? 0 : x;
@@ -35,7 +29,6 @@ window.addEventListener("load", () => {
     };
   }
 
-  //Draw the triangle
   circright.fill(ctx);
   circmiddle.fill(ctx);
   circleft.fill(ctx);
@@ -44,9 +37,7 @@ window.addEventListener("load", () => {
     $("#container input[type=button]").click(ChooseDot);
   });
 
-  //ma pean ju saama uue punkti kordinaadid
-  ChooseDot = () => {
-    // removedDot = anchorPoints.splice(0,1);
+  async function ChooseDot() {
     var newDot;
 
     var newDotx = (circleft.x + circmiddle.x) / 2;
@@ -61,6 +52,11 @@ window.addEventListener("load", () => {
       var lastDot = new Circle(lastDotx, lastDoty, 0.5);
       lastDot.fill(ctx);
       newDot = lastDot;
+      await sleep(10);
     }
-  };
+  }
+
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
 });
