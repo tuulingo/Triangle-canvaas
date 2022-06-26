@@ -15,9 +15,6 @@ window.addEventListener("load", ()=>{
     var circleft = new Circle(width * 0.33, height * 0.75, 1.5);
     const anchorPoints = new Array();
     anchorPoints.push(circleft, circmiddle, circright);
-    var firstDotx = (circleft.x + circmiddle.x) / 2;
-    var firstDoty = (circleft.y + circmiddle.y) / 2;
-    var firstDot = new Circle(firstDotx, firstDoty, 1);
     //targetDot is the dot that is going to be targeted next, lastDot i
     //Define the circle
     function Circle(x, y, r) {
@@ -35,37 +32,26 @@ window.addEventListener("load", ()=>{
     circright.fill(ctx1);
     circmiddle.fill(ctx1);
     circleft.fill(ctx1);
-    firstDot.fill(ctx1);
     $(document).ready(function() {
         $("#container input[type=button]").click(ChooseDot);
     });
     //ma pean ju saama uue punkti kordinaadid
     ChooseDot = ()=>{
         // removedDot = anchorPoints.splice(0,1);
-        var targetDot = anchorPoints[Math.floor(Math.random() * anchorPoints.length)];
-        var newDotx;
-        var newDoty;
-        newDotx = (firstDot.x + targetDot.x) / 2;
-        newDoty = (firstDot.y + targetDot.y) / 2;
-        var newDot = new Circle(newDotx, newDoty, 1);
-        if (newDotCount != 1) {
-            newDotCount++;
-            newDot.fill(ctx1);
-        } else {
-            console.log(newDotx);
+        var newDot;
+        var newDotx = (circleft.x + circmiddle.x) / 2;
+        var newDoty = (circleft.y + circmiddle.y) / 2;
+        var newDot = new Circle(newDotx, newDoty, 0.5);
+        newDot.fill(ctx1);
+        for(let i = 0; i < 50000; i++){
+            var targetDot = anchorPoints[Math.floor(Math.random() * anchorPoints.length)];
             var lastDotx = (newDot.x + targetDot.x) / 2;
             var lastDoty = (newDot.y + targetDot.y) / 2;
-            var lastDot = new Circle(lastDotx, lastDoty, 1);
+            var lastDot = new Circle(lastDotx, lastDoty, 0.5);
             lastDot.fill(ctx1);
+            newDot = lastDot;
         }
     };
-    function GenerateDots() {
-        while(randomDotsCount < 2)if (firstDotCount == 1) randomDotsCount++;
-        else {
-            firstDot.fill(ctx1);
-            firstDotCount++;
-        }
-    }
 });
 
 //# sourceMappingURL=index.c4775257.js.map
