@@ -19,14 +19,21 @@ html, body {
   display: block;
 }
 
-#startButton {
+#htmlContainer {
   z-index: 2;
-  background-color: gray;
-  border: 1px;
-  padding: 10px 50px;
   position: absolute;
   top: 100px;
   left: 100px;
+}
+
+#startButton {
+  background-color: gray;
+  border: 1px;
+  padding: 10px 50px;
+}
+
+.together {
+  display: inline-block;
 }
 
 /*# sourceMappingURL=index.3a01df49.css.map */

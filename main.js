@@ -12,9 +12,9 @@ window.addEventListener("load", () => {
 
   var dotsCreated = 0;
 
-  var circright = new Circle(width * 0.66, height * 0.75, 1);
-  var circmiddle = new Circle(width * 0.5, height * 0.25, 1);
-  var circleft = new Circle(width * 0.33, height * 0.75, 1);
+  var circright = new Circle(width * 0.95, height * 0.95, 1);
+  var circmiddle = new Circle(width * 0.5, height * 0.05, 1);
+  var circleft = new Circle(width * 0.05, height * 0.95, 1);
   const anchorPoints = new Array();
   anchorPoints.push(circleft, circmiddle, circright);
 
@@ -40,6 +40,7 @@ window.addEventListener("load", () => {
   });
 
   async function ChooseDot() {
+    $("#htmlContainer input[type=button]").prop("disabled", true);
     var newDotx = (circleft.x + circmiddle.x) / 2;
     var newDoty = (circleft.y + circmiddle.y) / 2;
     var newDot = new Circle(newDotx, newDoty, 1);
@@ -48,7 +49,7 @@ window.addEventListener("load", () => {
     $("#counter").text(dotsCreated.toString());
 
     await sleep(1200);
-    for (let i = 0; i < 50000; i++) {
+    for (let i = 0; i < 25000; i++) {
       var targetDot =
         anchorPoints[Math.floor(Math.random() * anchorPoints.length)];
       var lastDotx = (newDot.x + targetDot.x) / 2;
@@ -60,6 +61,7 @@ window.addEventListener("load", () => {
       dotsCreated++;
       await sleep(1);
     }
+    $("#htmlContainer input[type=button]").prop("disabled", false);
   }
 
   function sleep(ms) {

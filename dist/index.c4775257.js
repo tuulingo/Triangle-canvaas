@@ -5,18 +5,14 @@ window.addEventListener("load", ()=>{
     let ctx1 = el.getContext("2d");
     var height = window.innerHeight;
     var width = window.innerWidth;
-    var randomDotsCount = 0;
-    var firstDotCount = 0;
-    var newDotCount = 0;
     canvas.width = width;
     canvas.height = height;
-    var circright = new Circle(width * 0.66, height * 0.75, 1.5);
-    var circmiddle = new Circle(width * 0.5, height * 0.25, 1.5);
-    var circleft = new Circle(width * 0.33, height * 0.75, 1.5);
+    var dotsCreated = 0;
+    var circright = new Circle(width * 0.66, height * 0.75, 1);
+    var circmiddle = new Circle(width * 0.5, height * 0.25, 1);
+    var circleft = new Circle(width * 0.33, height * 0.75, 1);
     const anchorPoints = new Array();
     anchorPoints.push(circleft, circmiddle, circright);
-    //targetDot is the dot that is going to be targeted next, lastDot i
-    //Define the circle
     function Circle(x, y, r) {
         "use strict";
         this.x = x === null ? 0 : x;
@@ -28,30 +24,37 @@ window.addEventListener("load", ()=>{
             ctx.fill();
         };
     }
-    //Draw the triangle
     circright.fill(ctx1);
     circmiddle.fill(ctx1);
     circleft.fill(ctx1);
     $(document).ready(function() {
-        $("#container input[type=button]").click(ChooseDot);
+        $("#htmlContainer input[type=button]").click(ChooseDot);
     });
-    //ma pean ju saama uue punkti kordinaadid
-    ChooseDot = ()=>{
-        // removedDot = anchorPoints.splice(0,1);
-        var newDot;
+    async function ChooseDot() {
+        $("#htmlContainer input[type=button]").prop("disabled", true);
         var newDotx = (circleft.x + circmiddle.x) / 2;
         var newDoty = (circleft.y + circmiddle.y) / 2;
-        var newDot = new Circle(newDotx, newDoty, 0.5);
+        var newDot = new Circle(newDotx, newDoty, 1);
         newDot.fill(ctx1);
-        for(let i = 0; i < 50000; i++){
+        dotsCreated++;
+        $("#counter").text(dotsCreated.toString());
+        await sleep(1200);
+        for(let i = 0; i < 25000; i++){
             var targetDot = anchorPoints[Math.floor(Math.random() * anchorPoints.length)];
             var lastDotx = (newDot.x + targetDot.x) / 2;
             var lastDoty = (newDot.y + targetDot.y) / 2;
-            var lastDot = new Circle(lastDotx, lastDoty, 0.5);
+            var lastDot = new Circle(lastDotx, lastDoty, 0.75);
             lastDot.fill(ctx1);
+            $("#counter").text(dotsCreated.toString());
             newDot = lastDot;
+            dotsCreated++;
+            await sleep(1);
         }
-    };
+        $("#htmlContainer input[type=button]").prop("disabled", false);
+    }
+    function sleep(ms) {
+        return new Promise((resolve)=>setTimeout(resolve, ms));
+    }
 });
 
 //# sourceMappingURL=index.c4775257.js.map
